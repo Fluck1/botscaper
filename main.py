@@ -8,9 +8,9 @@ driver.get('https://www.nike.com/ru/launch/t/killshot-coastal-blue') #url
 button = driver.find_element_by_class_name('join-log-in')
 button.click()
 input_email = driver.find_element_by_name('emailAddress') #loginemail
-input_email.send_keys('battleshkalnik@gmail.com')
+input_email.send_keys('')
 input_password = driver.find_element_by_name('password')#loginpass
-input_password.send_keys('Kuchin890')
+input_password.send_keys('')
 button = driver.find_element_by_css_selector('.nike-unite .nike-unite-component.nike-unite-submit-button input')#buttom for login
 button.click()
 sleep(4)
