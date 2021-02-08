@@ -1,10 +1,11 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 #program by @Fluckych
 driver = webdriver.Chrome('C:\programs\py\BOT\driver\chromedriver.exe')
-driver.get('https://www.nike.com/ru/launch/t/killshot-coastal-blue') #url
+driver.get('https://www.nike.com/ru/launch/t/womens-space-hippie-04-this-is-trash-cactus-flower') #url
 button = driver.find_element_by_class_name('join-log-in')
 button.click()
 input_email = driver.find_element_by_name('emailAddress') #loginemail
@@ -14,23 +15,31 @@ input_password.send_keys('')
 button = driver.find_element_by_css_selector('.nike-unite .nike-unite-component.nike-unite-submit-button input')#buttom for login
 button.click()
 sleep(4)
-driver.refresh()
-sleep(2)
-button = driver.find_element_by_xpath("//li[@class='size va-sm-m d-sm-ib va-sm-t ta-sm-c  '][12]/button[@class='size-grid-dropdown size-grid-button']")
-button.click() #SIZE of pair
 
-button = driver.find_element_by_xpath("//div[@class='mt2-sm mb6-sm prl0-lg fs14-sm']/button[@class='ncss-btn-primary-dark btn-lg']")
+flag = 1
+while flag != 0:
+    flag = 0
+    try:
+        button = driver.find_element_by_xpath('//button[text()="US 9.5 (RU 42)"]')
+    except NoSuchElementException:
+        flag = 1
+        print(flag)
+
+button.click() #SIZE of pair
+button = driver.find_element_by_xpath('//button[text()="Оформить заказ"]')
 button.click() #offer
 
-input_lastname = driver.find_element_by_name('lastname') #lastname
-input_firstname = driver.find_element_by_name('firstname') #firstname
-input_middlename = driver.find_element_by_name('middlename') #middlename
-input_pcode = driver.find_element_by_name('pcode') #pcode
-button_shippingregion = driver.find_element_by_name('shippingRegion') #region
-input_shippingcity = driver.find_element_by_name('shippingCity') #City
-input_street = driver.find_element_by_name('shippingAddress1') # street
-input_house = driver.find_element_by_name('shippingAddress2')#house
-input_phone_umber = driver.find_element_by_name('shippingPhoneNumber')#number
-input_email = driver.find_element_by_name('shippingEmail')#email
-button = driver.find_element_by_xpath("//span[@class=checkbox-checkmark]") # button for agreement
+button = driver.find_element_by_xpath('//input[@class="textInput isInvalid ng-pristine ng-invalid ng-touched]')
+button.send_keys('')
+button = driver.find_element_by_xpath('//button[text()="Сохранить и продолжить"]')
 
+button = driver.find_element_by_xpath('//div[text()="Номер карты *"]')
+button.send_keys('')
+button = driver.find_element_by_xpath('//div[text()="MM/YY *"]')
+button.send_keys('')
+button = driver.find_element_by_xpath('//div[text()="CVV *"]')
+button.send_keys('')
+button = driver.find_element_by_xpath('//button[text()="Продолжить"]')
+button.click()
+button = driver.find_element_by_xpath('//button[text()="Отправить заказ"')
+button.click()
